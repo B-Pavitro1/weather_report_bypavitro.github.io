@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<title>Weather_Report</title>
+<link rel="stylesheet" type="text/css" href="weather.css">
+<meta name="viewport" content="device-width,initial-scale=1.0" >
+</head>
+<body>
+<p id="output"><h3>Enter the location to check weather report:</h3></p>
+<input id="city">
+<button onclick="show_temp()">Submit</button>
+<script type="text/javascript">
+function show_temp(){
+city =document.getElementById("city").value;
+
+httpRequest = new XMLHttpRequest();
+url = "https://api.weatherbit.io/v2.0/current?city="+city+"&key=f0f2372f50e64fd7a7ec6beb7955ef0e";
+httpRequest.open("GET",url);
+httpRequest.send();
+
+httpRequest.onreadystatechange = function(){
+if(this.readyState == 4 && this.status == 200){
+user_data = JSON.parse(this.responseText);
+document.getElementById("output").innerHTML = user_data.data[0].temp;
+}
+}
+}
+
+</script>
+</body>
+</html>
